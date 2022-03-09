@@ -614,8 +614,11 @@ class Aliyundrive {
                 //error_log1($res['body']);
                 $parent_file_id = json_decode($res['body'], true)['file_id'];
             }
-            //$response = $this->fileCreate($parent_file_id, $filename, $_POST['filesha1'], $fileinfo['size'], ceil($fileinfo['size']/$_POST['chunksize']));
-            $response = $this->fileCreate1($parent_file_id, $filename, $_POST['filesha1'], $_POST['proof_code'], $fileinfo['size'], ceil($fileinfo['size']/$_POST['chunksize']));
+            if (!function_exists('bcadd')) {
+                $response = $this->fileCreate($parent_file_id, $filename, $_POST['filesha1'], $fileinfo['size'], ceil($fileinfo['size']/$_POST['chunksize']));
+            } else {
+                $response = $this->fileCreate1($parent_file_id, $filename, $_POST['filesha1'], $_POST['proof_code'], $fileinfo['size'], ceil($fileinfo['size']/$_POST['chunksize']));
+            }
             $res = json_decode($response['body'], true);
             if (isset($res['exist'])) {
                 // 已经有
