@@ -573,7 +573,7 @@ class Aliyundrive {
         } else {
             if (isset($_POST['CalcProof'])&&is_numeric($_POST['filesize'])) {
                 // Calc proof code
-                if (!function_exists('hexdec')) {
+                if (!function_exists('bcadd')) {
                     // no php-bcmath
                     return output(0, 200);
                 } else {
